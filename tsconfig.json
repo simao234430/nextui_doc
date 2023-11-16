@@ -17,8 +17,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@nextui-org/*": ["./src/nextui-org/react/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx","./.contentlayer/generated"],
   "exclude": ["node_modules"]
 }

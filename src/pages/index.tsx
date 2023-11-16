@@ -1,12 +1,14 @@
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+// import { Inter } from 'next/font/google'
+import { promiseAllProperties, mapObjectValues } from '@/utils/object'
+import { ColorScheme, snippetToHtml } from '../utils/syntax-highlighting'
+import { type CodeSnippets, HowItWorks, codeSnippets } from '@/components/common/HowItWorks'
+// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between p-24  `}
     >
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
@@ -108,7 +110,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50 `}>
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
@@ -116,3 +118,18 @@ export default function Home() {
     </main>
   )
 }
+
+export type PreprocessedCodeSnippets = Record<ColorScheme, CodeSnippets>
+
+export const htmlForCodeSnippets = (colorScheme: ColorScheme): Promise<CodeSnippets> =>
+  promiseAllProperties(
+    mapObjectValues(
+      codeSnippets,
+      (_key, snippets) =>
+        Promise.all(
+          snippets.map(({ content, file, lines }) =>
+            snippetToHtml(content, colorScheme).then((_) => ({ file, lines, content: _ })),
+          ),
+        ) as any, // TODO: fix type
+    ),
+  )
