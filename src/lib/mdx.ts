@@ -41,9 +41,10 @@ export const getFileBySlug = async <T extends PostType>(
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
+        // remarkSectionize,
         rehypeSlug,
         rehypeAutolinkHeadings,
-        remarkSectionize,
+
         remarkFigure,
       ],
       rehypePlugins: [remarkMeta],

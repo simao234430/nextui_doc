@@ -52,3 +52,24 @@ const CardWithGlow = () => {
   )
 }
 ```
+
+<Callout variant="info">
+
+You can check out the full code of a similar example by navigating to the [Card with glow effect on hover snippet](/snippets/2020-12-26-cardwithgloweffectonhover/) page.
+
+</Callout>
+
+Now let's apply what we learned about the propagation mechanism of Framer Motion! In the playground below you'll find a motion component with a "hover" animation. When hovering it, a little icon will show up on the right end side of that component. You can try to:
+
+- **Modify the variant key** used in the motion component wrapping the button and see that now that it defers from what's being set by the parent component, the animation does not trigger and the button is not visible on hover.
+- **Set an**`animate` **prop on the motion component that wraps the button** and see that it now animates on its own and does not consume the variant set by the parent on hover.
+
+<AdvancedFramerMotionSandpack snippet="snippet1" />
+ 
+## Animate components when they are unmounting
+
+So far, we've only seen examples of animation being triggered either on mount or following some specific events like hover or tap. But **what about triggering an animation right before a component unmounts?** Some sort of "exit" transition?
+
+Well, in this second part, we'll take a look at the Framer Motion feature that addresses this use case and also the one that impressed me the most: `AnimatePresence`!
+
+I tried to implement some kind of exit animations before learning about `AnimatePresence`, but it was hacky and always required extra code to set a proper "transitional" state (like `isClosing`, `isOpening`) and toggle the corresponding animation of that state. As you can imagine, it was very error-prone.
