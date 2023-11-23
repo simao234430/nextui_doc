@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
+    /* @font-face {
       font-family: 'Virgil';
       font-style: normal;
       font-weight: 400;
@@ -126,7 +126,7 @@
     .line {
       min-width: 100%;
       border-left: 4px solid transparent
-    }
+    } */
   }
  
 

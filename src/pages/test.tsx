@@ -4,7 +4,8 @@ import { Button } from "@/nextui-org/react//button";
 export default function Page() {
  
     // eslint-disable-next-line react/display-name
-    return(  
+    return( 
+      <div className="flex h-screen items-center justify-center"> 
       <div className="flex flex-wrap gap-4 items-center">
       <Button color="default">
         Default
@@ -25,5 +26,6 @@ export default function Page() {
         Danger
       </Button>  
     </div>
+        </div>
 )
   }
