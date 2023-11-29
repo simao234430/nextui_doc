@@ -333,5 +333,5 @@ export const yooui = (
 
 
 
-  return corePlugin(themes , defaultTheme,defaultPrefix,true)
+  return corePlugin(themes , defaultTheme,defaultPrefix,addCommonColors)
 }

@@ -19,7 +19,7 @@ const base: SemanticBaseColors = {
       DEFAULT: "rgba(17, 17, 17, 0.15)",
     },
     focus: {
-      DEFAULT: common.blue[500],
+      DEFAULT: common.arcoblue[500],
     },
     overlay: {
       DEFAULT: "#000000",
@@ -50,7 +50,7 @@ const base: SemanticBaseColors = {
       DEFAULT: "#ECEDEE",
     },
     focus: {
-      DEFAULT: common.blue[500],
+      DEFAULT: common.arcoblue[500],
     },
     overlay: {
       DEFAULT: "#000000",
@@ -85,9 +85,9 @@ export const themeColorsLight: ThemeColors = {
     DEFAULT: common.zinc[300],
   },
   primary: {
-    ...common.blue,
-    foreground: readableColor(common.blue[500]),
-    DEFAULT: common.blue[500],
+    ...common.arcoblue,
+    foreground: readableColor(common.arcoblue[500]),
+    DEFAULT: common.arcoblue[500],
   },
   secondary: {
     ...common.purple,
@@ -119,9 +119,9 @@ export const themeColorsDark: ThemeColors = {
     DEFAULT: common.zinc[700],
   },
   primary: {
-    ...swapColorValues(common.blue),
-    foreground: readableColor(common.blue[500]),
-    DEFAULT: common.blue[500],
+    ...swapColorValues(common.arcoblue),
+    foreground: readableColor(common.arcoblue[500]),
+    DEFAULT: common.arcoblue[500],
   },
   secondary: {
     ...swapColorValues(common.purple),

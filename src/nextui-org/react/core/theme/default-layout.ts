@@ -20,7 +20,6 @@ export const defaultLayout: LayoutTheme = {
     small: "8px",
     medium: "12px",
     large: "14px",
-
   },
   borderWidth: {
     small: "1px",
