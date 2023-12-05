@@ -1,11 +1,9 @@
  
-import { mapPropsVariants } from "../../core/system";
-import { useDOMRef } from "../../core/utilities/react-utils";
-import buttonGroup from "./button-group";
+import { HTMLYooUIProps, PropGetter, mapPropsVariants } from "../../core/system";
+import { ButtonGroupVariantProps, buttonGroup } from "../../core/theme/components";
+import { ReactRef, useDOMRef } from "../../core/utilities/react-utils";
+ 
 import type {ButtonProps} from "./index";
- 
- 
- 
 import {useMemo, useCallback} from "react";
 interface Props extends HTMLYooUIProps, ButtonGroupVariantProps {
   /**

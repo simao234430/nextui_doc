@@ -1,6 +1,6 @@
-import type { SpinnerVariantProps } from "../../core/theme";
+import type { SlotsToClasses, SpinnerSlots, SpinnerVariantProps } from "../../core/theme";
 
-import {HTMLYooUIProps} from "../../core/system/types";
+import {HTMLYooUIProps, PropGetter} from "../../core/system/types";
 import {mapPropsVariants} from "../../core/system";
 
 import { spinner } from "../../core/theme";

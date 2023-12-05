@@ -2,6 +2,7 @@ import {forwardRef} from "../../core/system/utils"
 import {AnimatePresence, HTMLMotionProps, motion} from "framer-motion";
 import { RippleType } from "./use-ripple";
 import { HTMLYooUIProps } from "../../core/system";
+import { FC } from "react";
 
 
 export interface RippleProps extends HTMLYooUIProps<"span"> {

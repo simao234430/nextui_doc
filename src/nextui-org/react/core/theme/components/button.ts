@@ -456,8 +456,8 @@ const buttonGroup = tv({
     fullWidth: false,
   },
 });
-// export type ButtonGroupVariantProps = VariantProps<typeof buttonGroup>;
+export type ButtonGroupVariantProps = VariantProps<typeof buttonGroup>;
 export type ButtonVariantProps = VariantProps<typeof button>;
 
 
-export {button};
+export {button,buttonGroup};

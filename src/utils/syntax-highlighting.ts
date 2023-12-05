@@ -9,9 +9,9 @@ export type ColorScheme = 'light' | 'dark'
 export const snippetToHtml = async (snippet: string, colorScheme: ColorScheme) => {
   const themeName = `github-${colorScheme}`
 
-  if (!highlighterMap.has(colorScheme)) {
-    highlighterMap.set(colorScheme, await getHighlighter({ theme: themeName }))
-  }
+  // if (!highlighterMap.has(colorScheme)) {
+  //   highlighterMap.set(colorScheme, await getHighlighter({ theme: themeName }))
+  // }
 
   const settings: UserConfigSettings = {
     includeJSDocInHover: true,

@@ -6,15 +6,14 @@ import BlogLayout from '@/layouts/BlogPost';
 import { getFileBySlug, getFiles } from '@/lib/mdx';
 import MDXComponents from '@/components/MDX/MDXComponents';
  
-import { FrontMatterPost, PostType } from '@/types/post';
+import { FrontMatterPost, Post, PostType } from '@/types/post';
 import { BlogHeader } from '@/components/blog/BlogHeader';
+import { MDXContent } from '@/components/MDX/mdx-content';
+import { Container } from '@/components/common/Container';
 
-interface BlogProps {
-  post?: FrontMatterPost;
 
-}
 
-const Blog = ({ post}: BlogProps) => {
+const Blog = ({ post}: Post) => {
   // const { isFallback } = useRouter();
 
   // if (isFallback || !post) {
@@ -23,27 +22,28 @@ const Blog = ({ post}: BlogProps) => {
 
  
   return (
-    <BlogLayout frontMatter={post.frontMatter}  >
-      <div className="relative px-4 py-8 mx-auto max-w-screen-2xl md:px-8 md:py-16 lg:px-0">
+ 
+    <Container   >
+ <div className="relative px-4 py-8 mx-auto max-w-screen-2xl md:px-8 md:py-16 lg:px-0">
         <BlogHeader frontMatter={post.frontMatter} />
+     
+  
         <div className="blog prose prose-lg prose-slate prose-violet relative mx-auto w-full max-w-full prose-headings:mt-16 prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-invert dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 lg:max-w-[994px] lg:px-16">
         <MDXRemote
         {...post.mdxSource}
         components={{
           ...MDXComponents,
-    
+  
         }}
-      />  
-          {/* {MDXContent && <MDXContent components={{ ...(mdxComponents as any), BetaCodeWindow }} />}
-          <hr />
-          
-          {post.authors.map((author, index) => (
+      />
+                <hr />
+          {/* {post.authors.map((author, index) => (
             <Author key={index} {...author} />
           ))}
           {post.related_posts && <RelatedPosts posts={post.related_posts} />} */}
-        </div>
       </div>
-    </BlogLayout>
+      </div>
+    </Container>
   );
 };
 

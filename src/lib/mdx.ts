@@ -64,6 +64,7 @@ export const getFileBySlug = async <T extends PostType>(
   }
   return ({
     mdxSource,
+     
     frontMatter: data,
   } as unknown) as FrontMatterPostType<T>;
 };

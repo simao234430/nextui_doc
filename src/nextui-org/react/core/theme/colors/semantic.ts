@@ -100,9 +100,9 @@ export const themeColorsLight: ThemeColors = {
     DEFAULT: common.green[500],
   },
   warning: {
-    ...common.yellow,
-    foreground: readableColor(common.yellow[500]),
-    DEFAULT: common.yellow[500],
+    ...common.orange,
+    foreground: readableColor(common.orange[500]),
+    DEFAULT: common.orange[500],
   },
   danger: {
     ...common.red,
@@ -134,9 +134,9 @@ export const themeColorsDark: ThemeColors = {
     DEFAULT: common.green[500],
   },
   warning: {
-    ...swapColorValues(common.yellow),
-    foreground: readableColor(common.yellow[500]),
-    DEFAULT: common.yellow[500],
+    ...swapColorValues(common),
+    foreground: readableColor(common.orange[500]),
+    DEFAULT: common.orange[500],
   },
   danger: {
     ...swapColorValues(common.red),

@@ -1,13 +1,17 @@
-import {forwardRef} from "@nextui-org/system";
+ 
 import {OverlayContainer} from "@react-aria/overlays";
 import {AnimatePresence, motion} from "framer-motion";
-import {TRANSITION_VARIANTS} from "@nextui-org/framer-transitions";
-import {warn} from "@nextui-org/shared-utils";
+ 
+ 
 import {Children, cloneElement} from "react";
-import {getTransformOrigins} from "@nextui-org/aria-utils";
+ 
 import {mergeProps} from "@react-aria/utils";
 
 import {UseTooltipProps, useTooltip} from "./use-tooltip";
+import { forwardRef } from "../../core/system/utils";
+import { getTransformOrigins } from "../../core/utilities/aria-utils";
+import { TRANSITION_VARIANTS } from "../../core/utilities/framer-transitions";
+import { warn } from "../../core/utilities/shared-utils";
 
 export interface TooltipProps extends Omit<UseTooltipProps, "disableTriggerFocus" | "backdrop"> {}
 
@@ -84,6 +88,6 @@ const Tooltip = forwardRef<"div", TooltipProps>((props, ref) => {
   );
 });
 
-Tooltip.displayName = "NextUI.Tooltip";
+Tooltip.displayName = "Yoo.Tooltip";
 
 export default Tooltip;

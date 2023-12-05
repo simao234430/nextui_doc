@@ -20,6 +20,7 @@ export type Post = {
   slug: string;
   subtitle: string;
   title: string;
+  image: string,
   type: PostType.BLOGPOST;
 };
 

@@ -6,7 +6,7 @@ import { Icon } from 'src/components/common/Icon'
 import Image from 'next/image'
 import { format } from 'date-fns'
 
-export const BlogHeader: FC<{ frontMatter: frontMatter }> = ({ frontMatter }) => {
+export const BlogHeader: FC<{ frontMatter: any }> = ({ frontMatter }) => {
   const [top, setTop] = useState<boolean>(true)
   const {
     date,

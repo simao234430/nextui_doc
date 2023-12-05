@@ -1,7 +1,7 @@
 // import { nextui } from './src/nextui-org/react/theme'
 import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import {commonColors, nextui} from './src/nextui-org/react/theme'
+ 
 import colors from  'tailwindcss/colors'
 import { yooui } from './src/nextui-org/react/core/theme'
  

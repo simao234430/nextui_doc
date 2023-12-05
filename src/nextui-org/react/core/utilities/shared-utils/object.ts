@@ -63,7 +63,7 @@ export const getKeyValue = (obj: any, key: Key) => {
   if (!isObject(obj)) return obj;
   if (obj instanceof Array) return [...obj];
 
-  return obj[key];
+  return obj[key as number];
 };
 
 /**

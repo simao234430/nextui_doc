@@ -10,7 +10,7 @@ export class PressEvent implements IPressEvent {
   ctrlKey: boolean;
   metaKey: boolean;
   altKey: boolean;
-  #shouldStopPropagation = true;
+  #shouldStopPropagation: boolean | undefined= true;
 
   constructor(type: IPressEvent["type"], pointerType: PointerType, originalEvent: EventBase) {
     this.type = type;

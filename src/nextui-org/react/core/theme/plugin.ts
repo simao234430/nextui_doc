@@ -1,4 +1,4 @@
-import { yoouiluginConfig } from './types'
+import { ConfigTheme, ConfigThemes, DefaultThemeType, yoouiluginConfig } from './types'
 import plugin from 'tailwindcss/plugin.js'
 import { semanticColors, commonColors } from './colors'
 import get from "lodash.get";

@@ -1,8 +1,9 @@
-import { Post } from 'contentlayer/generated'
+// import { Post } from 'contentlayer/generated'
 import { FC } from 'react'
 import Link from 'next/link'
 import { Icon } from 'src/components/common/Icon'
 import { format } from 'date-fns'
+import { Post } from '@/types/post'
 
 export const BlogDetails: FC<{ post: Post; className?: string }> = ({ post, className }) => {
   return (

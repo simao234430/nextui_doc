@@ -4,6 +4,7 @@ import { forwardRef } from "../../core/system";
 import {ButtonGroupProvider} from "./button-group-context";
 import {UseButtonGroupProps, useButtonGroup} from "./use-button-group";
 
+ 
 export interface ButtonGroupProps extends UseButtonGroupProps {}
 
 const ButtonGroup = forwardRef<"div", ButtonGroupProps>((props, ref) => {
@@ -21,6 +22,6 @@ const ButtonGroup = forwardRef<"div", ButtonGroupProps>((props, ref) => {
   );
 });
 
-ButtonGroup.displayName = "NextUI.ButtonGroup";
+ButtonGroup.displayName = "YooUI.ButtonGroup";
 
 export default ButtonGroup;

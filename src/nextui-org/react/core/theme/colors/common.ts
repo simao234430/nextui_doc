@@ -8,6 +8,7 @@ import {yellow} from "./yellow";
 import {cyan} from "./cyan";
 import {zinc} from "./zinc";
 import {lime} from "./lime";
+import {orange} from "./orange";
 export const commonColors = {
   white: "#ffffff",
   black: "#000000",
@@ -20,7 +21,8 @@ export const commonColors = {
   yellow,
   cyan,
   zinc,
-  lime
+  lime,
+  orange
 };
 
 export type CommonColors = typeof commonColors;

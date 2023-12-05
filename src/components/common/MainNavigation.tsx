@@ -3,7 +3,8 @@ import { Logo } from './Logo'
 import { Label } from './Label'
 import { useRouter } from "next/router";
 import { isExternalUrl } from '../../utils/helpers'
-import { Icon } from "./Icon";
+import { Icon, IconName } from "./Icon";
+import { FC } from "react";
 const navLinks: Array<{ label: string; url: string }> = [
     { label: 'Documentation', url: '/docs' },
     { label: 'Blog', url: '/blog' },

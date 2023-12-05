@@ -1,12 +1,16 @@
 import type { InferGetStaticPropsType } from 'next'
 // TODO remove eslint-disable when fixed https://github.com/import-js/eslint-plugin-import/issues/1810
 // eslint-disable-next-line import/no-unresolved
-import { useLiveReload } from 'next-contentlayer/hooks'
+// import { useLiveReload } from 'next-contentlayer/hooks'
 import type { FC } from 'react'
-import { allPosts } from 'contentlayer/generated'
+ 
 import { Container } from '../../components/common/Container'
 import { defineStaticProps } from '../../utils/next'
-
+import { BlogPostList } from './blog-post'
+import { getAllFilesFrontMatter, getFiles } from '@/lib/mdx'
+import { PostType } from '@/types/post'
+import dynamic from 'next/dynamic'
+ 
 
 const content = {
   title: 'Contentlayer Blog',
@@ -14,28 +18,19 @@ const content = {
 }
 
 export const getStaticProps = defineStaticProps(async (context) => {
-  const posts = allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const posts = await getAllFilesFrontMatter(PostType.BLOGPOST);
 
   return { props: { posts } }
 })
 
 const Blog: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ posts }) => {
-  useLiveReload()
-
+ 
+ 
   return (
     <Container title="Blog – Contentlayer" description={content.description} urlPath="/blog">
-      <div className="w-full max-w-screen-xl px-4 py-8 mx-auto space-y-16 md:px-8 md:py-24 lg:space-y-24 lg:py-32">
-        {/* <div className="max-w-3xl space-y-8">
-          <Heading level={1}>{content.title}</Heading>
-          <Paragraph className="text-lg">{content.description}</Paragraph>
-        </div> */}
-        <div className="space-y-12 md:space-y-16">
-          {posts.map((post, index) => (
-            // eslint-disable-next-line react/jsx-key
-            <div>{post.title}</div>
-          ))}
+     <div className="w-full lg:px-16 mt-12"> 
+        <BlogPostList posts={posts} />
         </div>
-      </div>
     </Container>
   )
 }

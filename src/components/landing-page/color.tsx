@@ -7,6 +7,7 @@ import {get, isEmpty} from "lodash";
 import { Button } from "@/nextui-org/react/components/button";
 import { commonColors, semanticColors } from "@/nextui-org/react/core/theme/colors";
 import { useClipboard } from "@/nextui-org/react/core/hooks/use-clipboard";
+import { Tooltip } from "@/nextui-org/react/components/tooltip";
  
 type ColorsItem = {
   color: string;
@@ -61,7 +62,7 @@ const Swatch = ({color, scale}: {color: string; scale?: string}) => {
   };
 
   return (
- 
+    <Tooltip content="Copied" isOpen={copied}>
       <Button
         className=" hover:scale-105    flex flex-row  justify-between  w-48 h-12   rounded-none shadow-small"
         style={{
@@ -90,7 +91,7 @@ const Swatch = ({color, scale}: {color: string; scale?: string}) => {
         </span>
 
       </Button>
- 
+    </Tooltip>
   );
 };
 
@@ -110,8 +111,8 @@ const SematicSwatch = ({
   let value: string = "";
   const [colorName, colorScale] = color.split("-");
 
-  let currentPalette = get(semanticColors, theme ?? "", {});
-
+  let currentPalette = get(semanticColors, "light" ?? "", {});
+  console.log(semanticColors)
   if (!colorScale) {
     value = get(currentPalette, `${colorName}.DEFAULT`, "");
   } else {
@@ -129,9 +130,9 @@ const SematicSwatch = ({
   };
 
   return (
- 
+    <Tooltip content="Copied" isOpen={copied}>
       <Button
-        className={`${className} justify-between  flex flex-row w-24 h-24 m-2 rounded-medium shadow-small`}
+        className={`${className} justify-between  flex flex-row w-48 h-12 m-2 rounded-medium shadow-small`}
         onPress={handleCopy}
       >
         <span className={`${textClassName} text-tiny font-semibold`}>{color}</span>
@@ -139,10 +140,33 @@ const SematicSwatch = ({
           <span className={`${textClassName} text-tiny font-semibold`}>{value}</span>
         )}
       </Button>
- 
+    </Tooltip>
   );
 };
 
+const SemanticColorsCard =  ({colors, isSematic = false}: SwatchSetProps) => (
+  <div className="flex flex-row flex-wrap items-center justify-center">
+    {colors.map(({title, items}) => (
+      <div key={title} className="flex flex-col items-start w-full h-full">
+        <h2 className="text-xl font-bold text-foreground">{title}</h2>
+        <div className="flex flex-row flex-wrap items-center justify-start w-full h-full px-4 py-1">
+          {items.map((c, index) =>
+            isSematic ? (
+              <SematicSwatch
+                key={`${c.color}-${index}`}
+                className={c.className}
+                color={c.color}
+                textClassName={c.textClassName}
+              />
+            ) : (
+              <Swatch key={`${c.color}-${index}`} color={c.color} scale={c.scale} />
+            ),
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+);
 const SwatchCard= ({colors, isSematic = false}: SwatchSetProps) => (
   <div style={{ textAlign: 'center'}} className="flex flex-row flex-wrap items-center justify-center">
     {colors.map(({title, items}) => (
@@ -166,8 +190,6 @@ const SwatchCard= ({colors, isSematic = false}: SwatchSetProps) => (
     ))}
   </div>
 );
-
- 
 
 const getCommonItems = (colors: string[]) => {
   return colors.map((color, index, array) => ({
@@ -220,6 +242,10 @@ export const CommonColors = () => {
           title: "Zinc",
           items: getCommonItems([...Object.values(commonColors.zinc)]),
         },
+        {
+          title: "Orange",
+          items: getCommonItems([...Object.values(commonColors.orange)]),
+        },
       ]}
     />
   );
@@ -227,7 +253,7 @@ export const CommonColors = () => {
 
 export const SemanticColors = () => {
   return (
-    <SwatchCard
+    <SemanticColorsCard
       isSematic
       colors={[
         {

@@ -1,23 +1,25 @@
-import type {PopoverVariantProps, SlotsToClasses} from "@nextui-org/theme";
-import type {AriaTooltipProps} from "@react-types/tooltip";
+ 
+ 
 import type {OverlayTriggerProps} from "@react-types/overlays";
 import type {HTMLMotionProps} from "framer-motion";
-import type {OverlayOptions} from "@nextui-org/aria-utils";
-
+ 
+import {AriaTooltipProps, useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
 import {ReactNode, Ref, useId, useImperativeHandle, useLayoutEffect} from "react";
 import {useTooltipTriggerState} from "@react-stately/tooltip";
 import {mergeProps} from "@react-aria/utils";
-import {useTooltip as useReactAriaTooltip, useTooltipTrigger} from "@react-aria/tooltip";
+ 
 import {useOverlayPosition, useOverlay, AriaOverlayProps} from "@react-aria/overlays";
-import {HTMLNextUIProps, mapPropsVariants, PropGetter} from "@nextui-org/system";
-import {popover} from "@nextui-org/theme";
-import {clsx, dataAttr} from "@nextui-org/shared-utils";
-import {ReactRef, mergeRefs} from "@nextui-org/react-utils";
-import {createDOMRef} from "@nextui-org/react-utils";
+ 
+ 
 import {useMemo, useRef, useCallback} from "react";
-import {toReactAriaPlacement, getArrowPlacement} from "@nextui-org/aria-utils";
+import { HTMLYooUIProps, PropGetter, mapPropsVariants } from "../../core/system";
+import { PopoverVariantProps, SlotsToClasses, popover } from "../../core/theme";
+import { OverlayOptions, getArrowPlacement, toReactAriaPlacement } from "../../core/utilities/aria-utils";
+import { ReactRef, mergeRefs } from "../../core/utilities/react-utils";
+import { clsx, dataAttr } from "../../core/utilities/shared-utils";
+ 
 
-interface Props extends Omit<HTMLNextUIProps, "content"> {
+interface Props extends Omit<HTMLYooUIProps, "content"> {
   /**
    * Ref to the DOM node.
    */

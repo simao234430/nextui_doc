@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import { MainNavigation } from './MainNavigation'
+import { FC } from 'react'
 
 export const Container: FC<any> = ({ children, ...customMeta }) => {
-    const router = useRouter()
+ 
   
    
   

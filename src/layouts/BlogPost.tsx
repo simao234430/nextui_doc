@@ -1,21 +1,18 @@
 import { Container } from "@/components/common/Container";
+import { Post, ReadingTime } from "@/types/post";
 
 interface Props {
   children: React.ReactNode;
-  frontMatter: Post & { readingTime: ReadingTime };
+  // frontMatter: Post & { readingTime: ReadingTime };
  
 }
 
  
 
-const BlogLayout = ({ children, frontMatter }: Props) => {
- 
-
+const BlogLayout = ({ children }: Props) => {
   return (
-    <Container
- 
-    >
-         {children}
+    <Container>
+     {children}
     </Container>
   );
 };
