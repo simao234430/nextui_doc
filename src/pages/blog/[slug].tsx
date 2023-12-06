@@ -8,12 +8,16 @@ import MDXComponents from '@/components/MDX/MDXComponents';
  
 import { FrontMatterPost, Post, PostType } from '@/types/post';
 import { BlogHeader } from '@/components/blog/BlogHeader';
-import { MDXContent } from '@/components/MDX/mdx-content';
+
 import { Container } from '@/components/common/Container';
+import Balancer from 'react-wrap-balancer';
 
+interface BlogProps {
+  post?: FrontMatterPost;
+ 
+}
 
-
-const Blog = ({ post}: Post) => {
+const Blog = ({ post}: BlogProps) => {
   // const { isFallback } = useRouter();
 
   // if (isFallback || !post) {
@@ -23,26 +27,19 @@ const Blog = ({ post}: Post) => {
  
   return (
  
-    <Container   >
- <div className="relative px-4 py-8 mx-auto max-w-screen-2xl md:px-8 md:py-16 lg:px-0">
-        <BlogHeader frontMatter={post.frontMatter} />
-     
-  
-        <div className="blog prose prose-lg prose-slate prose-violet relative mx-auto w-full max-w-full prose-headings:mt-16 prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-invert dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 lg:max-w-[994px] lg:px-16">
+    <Container>
+     <div className="relative px-4 py-8 mx-auto max-w-screen-2xl md:px-8 md:py-16 lg:px-0">
+        <BlogHeader frontmatter={post?.frontMatter} />
+ 
+        <div className="blog prose prose-lg prose-slate prose-violet relative mx-auto w-full max-w-full prose-headings:mt-16 prose-headings:font-semibold prose-a:font-normal prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-hr:border-gray-200 dark:prose-invert dark:prose-a:text-violet-400 dark:prose-hr:border-gray-800 lg:max-w-[994px] lg:px-16"> 
         <MDXRemote
-        {...post.mdxSource}
+        {...post?.content}
         components={{
           ...MDXComponents,
   
-        }}
-      />
-                <hr />
-          {/* {post.authors.map((author, index) => (
-            <Author key={index} {...author} />
-          ))}
-          {post.related_posts && <RelatedPosts posts={post.related_posts} />} */}
-      </div>
-      </div>
+        }}/>
+     </div>
+    </div>
     </Container>
   );
 };
@@ -50,10 +47,10 @@ const Blog = ({ post}: Post) => {
 export default Blog;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getFiles(PostType.BLOGPOST);
+  const posts = await getFiles();
 
   return {
-    paths: posts.map((p) => ({
+    paths: posts.map((p: string) => ({
       params: {
         slug: p.replace(/\.mdx/, ''),
       },
@@ -64,7 +61,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const post = await getFileBySlug(PostType.BLOGPOST, params!.slug as string);
+    const post = await getFileBySlug(  params!.slug as string);
 
  
     return { props: { post  } };

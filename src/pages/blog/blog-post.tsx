@@ -13,10 +13,10 @@ import { Avatar } from "@/nextui-org/react/components/avatar";
 import { Link } from "@/nextui-org/react/components/link";
 import { Image } from "@/nextui-org/react/components/image";
  
-import { Post } from "@/types/post";
+import { MDXFrontMatter } from "@/types/mdx";
  
 
-const BlogPostCard = (post: Post) => {
+const BlogPostCard = (frontmatter: MDXFrontMatter) => {
   // const isMounted = useIsMounted();
 
   const handlePress = () => {
@@ -40,28 +40,28 @@ const BlogPostCard = (post: Post) => {
           transition={{duration: 0.3}}
         >
           <Card
-            isBlurred
+            isBlurred 
             as={NextLink}
             className="p-2 h-full border-transparent text-start bg-white/5 dark:bg-default-400/10 backdrop-blur-lg backdrop-saturate-[1.8]"
-            href={post.slug}
+            href={frontmatter.url}
             // isPressable={!!post.url}
             onPress={handlePress}
           >
             <CardHeader>
               {/* <Link suppressHydrationWarning>    */}
-                <Balancer suppressHydrationWarning>{post.title}</Balancer>
+                <Balancer suppressHydrationWarning>{frontmatter.title}</Balancer>
               {/* </Link> */}
             </CardHeader>
             <CardBody className="pt-0 px-2 pb-1">
  
-              <Image className="mb-4" alt="" src={post.image} />
-              <p className="font-normal w-full text-default-600">{post.description}</p>
+              <Image className="mb-4" alt="" src={frontmatter.image} />
+              <p className="font-normal w-full text-default-600">{frontmatter.description}</p>
             </CardBody>
             <CardFooter className="flex justify-between items-center">
-              <time className="block text-small text-default-500" dateTime={post.date}>
-                {format(parseISO(post.date), "LLLL d, yyyy")}
+              <time className="block text-small text-default-500" dateTime={frontmatter.date}>
+                {format(parseISO(frontmatter.date),"yyyy-MM-dd")}
               </time>
-              {/* <Avatar size="sm" src={post.author?.avatar} /> */}
+              <Avatar size="sm" src={frontmatter.author?.avatar} />
             </CardFooter>
           </Card>
         </motion.article>
@@ -70,7 +70,7 @@ const BlogPostCard = (post: Post) => {
   );
 };
 
-export const BlogPostList = ({posts}: {posts: Post[]}) => {
+export const BlogPostList = ({posts}: {posts: MDXFrontMatter[]}) => {
   return (
     <div className="mt-10 grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
       {posts.map((post, idx) => (

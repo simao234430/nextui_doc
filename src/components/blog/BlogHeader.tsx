@@ -5,18 +5,19 @@ import Link from 'next/link'
 import { Icon } from 'src/components/common/Icon'
 import Image from 'next/image'
 import { format } from 'date-fns'
+import { MDXFrontMatter } from '@/types/mdx'
 
-export const BlogHeader: FC<{ frontMatter: any }> = ({ frontMatter }) => {
+export const BlogHeader: FC<{ frontmatter: MDXFrontMatter }> = ({ frontmatter }) => {
   const [top, setTop] = useState<boolean>(true)
   const {
     date,
     updated,
     slug,
-    subtitle,
-    title,
     readingTime,
-    cover,
-  } = frontMatter;
+    title,
+ 
+ 
+  } = frontmatter;
   useEffect(() => {
     const handleScroll = () => setTop(window.scrollY <= 50)
     handleScroll()
@@ -32,15 +33,14 @@ export const BlogHeader: FC<{ frontMatter: any }> = ({ frontMatter }) => {
         <h1 className="text-2xl font-semibold text-slate-800 dark:text-slate-200 md:text-3xl lg:text-4xl">
           {title}
         </h1>
-        <p className="mb-2 flex">
-          <span className="mt-1 mr-2 block w-3 shrink-0   text-violet-600 dark:text-violet-400">
-            <Icon name="calendar" />
-          </span>
-          <span>{format(new Date(date), 'MMMM dd, yyyy')}     /{''}
-                  {readingTime.text} </span>
-
-                  <span> Last Updated{' '}
-                  {format(new Date(Date.parse(updated)), 'MMMM d, yyyy')}</span>
+        <p className="mb-2 flex    ">
+        <span className="mt-1 mr-2 block w-3 shrink-0 text-violet-600 dark:text-violet-400">
+              <Icon name="calendar" />
+            </span>
+            <span className="grow">{format(new Date( date), "yyyy-MM-dd")}</span>
+          <span className="grow">{readingTime}   </span>
+       
+           <span className="grow">更新于{' '}{format(new Date(Date.parse(updated)), "yyyy-MM-dd")}</span>
         </p>
       </div>
     </div>
@@ -49,21 +49,17 @@ export const BlogHeader: FC<{ frontMatter: any }> = ({ frontMatter }) => {
         top ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      <div className="mx-auto h-full lg:max-w-[994px] lg:px-16">
-        <div className="flex h-full items-center space-x-2 text-sm">
-          <Link
-            href="/blog"
-            className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">
-            Blog
-          </Link>
-          <span className="inline-block w-1.5 text-slate-400 dark:text-slate-500">
-            <Icon name="chevron-right" />
-          </span>
-          <h1 className="text-slate-800 dark:text-slate-200 ">
-          {format(new Date(Date.parse(date)), 'MMMM d, yyyy')} /{' '}
-                  { } /</h1>
+        <div className="mx-auto h-full lg:max-w-[994px] lg:px-16">
+          <div className="flex h-full items-center space-x-2 text-sm">
+            <Link legacyBehavior href="/blog">
+              <a className="inline whitespace-nowrap hover:text-slate-600 dark:hover:text-slate-300">Blog</a>
+            </Link>
+            <span className="inline-block w-1.5 text-slate-400 dark:text-slate-500">
+              <Icon name="chevron-right" />
+            </span>
+            <h1 className="text-slate-800 dark:text-slate-200 ">{title}</h1>
+          </div>
         </div>
-      </div>
     </div>
   </>;
 }

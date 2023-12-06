@@ -21,34 +21,20 @@ export type Post = {
   subtitle: string;
   title: string;
   image: string,
+  description: string;
   type: PostType.BLOGPOST;
 };
 
 export type FrontMatterPost = {
   frontMatter: Post & {
     readingTime: ReadingTime;
+    date: string;
   };
+  slug:string,
   tweetIDs: string[];
   mdxSource: MDXRemoteSerializeResult;
 };
 
-export type Snippet = {
-  date: string;
-  language: string;
-  slug: string;
-  title: string;
-  description: string;
-  snippetImage: string;
-  type: PostType.SNIPPET;
-};
-
-export type FrontMatterSnippet = {
-  frontMatter: Snippet;
-  mdxSource: MDXRemoteSerializeResult;
-};
-
-export type PostByType<T> = T extends PostType.BLOGPOST ? Post : Snippet;
-
-export type FrontMatterPostType<T> = T extends PostType.BLOGPOST
-  ? FrontMatterPost
-  : FrontMatterSnippet;
+ 
+ 
+ 

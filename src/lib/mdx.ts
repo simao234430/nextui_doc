@@ -3,88 +3,86 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 import { serialize } from 'next-mdx-remote/serialize';
-import { FrontMatterPostType, PostByType, PostType } from '@/types/post';
+// import { FrontMatterPostType, PostByType, PostType } from '@/types/post';
 import { remarkSectionize } from './remark-sectionize-fork';
 import { remarkFigure } from './remark-figure';
 import { remarkMeta } from './remark-meta';
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import { MDXFrontMatter } from '@/types/mdx';
+import { parseISO, format } from "date-fns";
 
-const typeToPath = {
-  [PostType.BLOGPOST]: 'content/blog',
-  [PostType.SNIPPET]: 'snippets',
+export const formatDate = (date: string): string => {
+  return format(parseISO(date), "MMMM dd, yyyy");
 };
+
+
+// const typeToPath = {
+//   [PostType.BLOGPOST]: 'content/blog',
+//   [PostType.SNIPPET]: 'snippets',
+// };
 
 const root = process.cwd();
 
-export const getFiles = async (type: PostType) => {
-  return fs.readdirSync(path.join(root, typeToPath[type] ));
+export const getFiles = async ( ) => {
+  return fs.readdirSync(path.join(root, "content/blog" ));
 };
 
 // Regex to find all the custom static tweets in a MDX file
 const TWEET_RE = /<StaticTweet\sid="[0-9]+"\s\/>/g;
 
-export const getFileBySlug = async <T extends PostType>(
-  type: T,
-  slug: string
-): Promise<FrontMatterPostType<T>> => {
+export const getFileBySlug =  async (slug:string) => {
   const source = fs.readFileSync(
-    path.join(root, typeToPath[type], `${slug}.mdx`),
+    path.join(root, "content/blog", `${slug}.mdx`),
     'utf8'
   );
 
-  const parsedFile = matter(source);
-
-  const data = parsedFile.data;
-  const content = parsedFile.content;
-
+  // const parsedFile = matter(source);
+  // const data = parsedFile.data;
+  // const content = parsedFile.content;
+  const { data, content } = matter(source);
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         // remarkSectionize,
         rehypeSlug,
         rehypeAutolinkHeadings,
-
         remarkFigure,
       ],
       rehypePlugins: [remarkMeta],
     },
   });
-  if (type === PostType.BLOGPOST) {
-    const result = {
-      mdxSource,
- 
-      frontMatter: {
-        readingTime: readingTime(content),
-        ...data,
-      },
-    };
+  return {
+    frontMatter: {
+      ...data,
+      readingTime: readingTime(content).text,
+      url: "blog/" + slug,
+      slug: slug,
+    } as MDXFrontMatter,
+    content:mdxSource,
+  };
 
-    return (result as unknown) as FrontMatterPostType<T>;
-  }
-  return ({
-    mdxSource,
-     
-    frontMatter: data,
-  } as unknown) as FrontMatterPostType<T>;
 };
 
-export const getAllFilesFrontMatter = async <T extends PostType>(
-  type: T
-): Promise<Array<PostByType<T>>> => {
-  const files = fs.readdirSync(path.join(root, typeToPath[type]));
+export const getAllFilesFrontMatter =  ()  => {
+  const files = fs.readdirSync(path.join(root, "content/blog"));
 
   const posts = files
     .map((postSlug: string) => {
       const source = fs.readFileSync(
-        path.join(root, typeToPath[type], postSlug),
+        path.join(root, "content/blog", postSlug),
         'utf8'
       );
-      const parsedFile = matter(source);
-
-      return parsedFile.data as PostByType<T>;
+      const { data, content } = matter(source);
+      return {
+        ...data,
+        readingTime: readingTime(content).text,
+        url: "blog/" + postSlug.replace(".mdx", ""),
+        slug: postSlug.replace(".mdx", ""),
+      } as unknown as MDXFrontMatter;
     })
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+    .sort((a, b) => (     
+       new Date(b.date).getTime() -new Date(a.date).getTime()));
+       return posts;
 
-  return posts;
 };
